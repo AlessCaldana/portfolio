@@ -89,3 +89,4 @@ Antes de publicar el sitio, hay algunos placeholders que dejé listos para que r
 - Todas las secciones comparten un **riel vertical tipo "circuito"** con un nodo brillante que recorre el lado izquierdo de la página, conectando visualmente cada sección (ver `components/section.tsx`).
 - Cada sección tiene un "eyebrow" estilo terminal (`$ whoami`, `$ cat about.md`, `$ ls skills/`, etc.) como guiño a tu perfil de ingeniero de sistemas.
 - Paleta: fondo casi negro (`#05070A`), acentos azules (`#3D63FF` / `#7FA8FF`), verde señal para elementos "vivos" (`#34D399`).
+# portfolio
