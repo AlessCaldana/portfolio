@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Code2, Database, GitBranch, Palette } from "lucide-react";
 
@@ -61,11 +62,19 @@ export function HeroIllustration() {
         ))}
       </svg>
 
-      {/* center avatar frame — swap the initials block for an <Image src="/profile.jpg" /> when a real photo is available */}
-      <div className="absolute inset-[18%] flex items-center justify-center rounded-full border border-line bg-gradient-to-br from-surface-2 to-void shadow-[0_0_60px_-10px_rgba(61,99,255,0.45)]">
-        <div className="absolute inset-0 rounded-full bg-noise opacity-40" />
+      {/* center avatar frame */}
+      <div className="absolute inset-[14%] flex items-center justify-center overflow-hidden rounded-full border-2 border-white/[0.1] bg-gradient-to-br from-surface-2 to-void shadow-[0_0_80px_-8px_rgba(61,99,255,0.55),0_0_0_1px_rgba(255,255,255,0.06)]">
+        <Image
+          src="/profile.png"
+          alt="Alessandro Caldana"
+          fill
+          sizes="(max-width: 768px) 50vw, 300px"
+          className="object-cover object-top"
+          style={{ transform: "scale(0.96)", transformOrigin: "center 30%" }}
+          priority
+        />
+        <div className="absolute inset-0 rounded-full bg-noise opacity-25" />
         <div className="absolute inset-[6px] rounded-full border border-white/[0.06]" />
-        <span className="font-display text-6xl font-medium tracking-tight text-ink/90">AC</span>
         <span className="absolute bottom-[14%] right-[14%] flex h-4 w-4 items-center justify-center rounded-full bg-void ring-2 ring-void">
           <span className="h-2.5 w-2.5 animate-pulse-soft rounded-full bg-signal" />
         </span>

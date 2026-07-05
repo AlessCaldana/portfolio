@@ -27,12 +27,12 @@ export function Navbar() {
   }, [open]);
 
   const links = [
-    { id: "about", label: t.nav.about },
-    { id: "skills", label: t.nav.skills },
-    { id: "projects", label: t.nav.projects },
-    { id: "experience", label: t.nav.experience },
-    { id: "education", label: t.nav.education },
-    { id: "contact", label: t.nav.contact },
+    { id: "about",        label: t.nav.about },
+    { id: "skills",       label: t.nav.skills },
+    { id: "experience",   label: t.nav.experience },
+    { id: "case-studies", label: t.nav.caseStudies },
+    { id: "projects",     label: t.nav.projects },
+    { id: "contact",      label: t.nav.contact },
   ];
 
   const go = (id: string) => {

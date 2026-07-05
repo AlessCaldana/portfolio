@@ -19,7 +19,7 @@ export function Projects() {
       <div className="grid gap-5 lg:grid-cols-2">
         {t.projects.items.map((p, i) => (
           <Reveal key={p.key} delay={(i % 2) * 0.08}>
-            <article className="glass group flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.05] sm:p-7">
+            <article className="glass group flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/[0.15] hover:bg-white/[0.055] hover:shadow-[0_8px_32px_rgba(0,0,0,0.35)] sm:p-7">
               <div className="mb-3 flex flex-wrap gap-1.5">
                 {p.tech.map((tech) => (
                   <Badge key={tech}>{tech}</Badge>

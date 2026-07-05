@@ -5,6 +5,7 @@ import { Globe, ChevronDown } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
 import { locales, localeMeta, Locale } from "@/lib/translations";
 import { cn } from "@/lib/utils";
+import { FlagIcon } from "@/components/flag-icon";
 
 export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
   const { locale, setLocale, t } = useI18n();
@@ -32,7 +33,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
         )}
       >
         <Globe className="h-3.5 w-3.5" strokeWidth={1.75} />
-        <span>{localeMeta[locale].flag}</span>
+        <FlagIcon code={locale} className="h-4 w-4" />
         <span className="hidden sm:inline">{locale.toUpperCase()}</span>
         <ChevronDown className={cn("h-3 w-3 transition-transform", open && "rotate-180")} />
       </button>
@@ -51,7 +52,7 @@ export function LanguageSwitcher({ compact = false }: { compact?: boolean }) {
                 l === locale ? "text-ink" : "text-muted"
               )}
             >
-              <span>{localeMeta[l].flag}</span>
+              <FlagIcon code={l} className="h-5 w-5 shrink-0" />
               <span className="font-body">{localeMeta[l].label}</span>
             </button>
           ))}

@@ -72,9 +72,7 @@ El selector de idioma (🇪🇸 / 🇺🇸 / 🇮🇹) vive en la navbar y en el
 
 Antes de publicar el sitio, hay algunos placeholders que dejé listos para que reemplaces:
 
-1. **Foto de perfil** — Como no me compartiste una foto real, el hero usa un avatar con iniciales "AC" generado con gradiente (`components/hero-illustration.tsx`). Para poner tu foto real:
-   - Agrega tu imagen en `public/profile.jpg` (o `.png`)
-   - En `components/hero-illustration.tsx`, reemplaza el bloque del círculo con iniciales por un `<Image src="/profile.jpg" ... />` de `next/image` (recuerda que `images.unoptimized: true` ya está configurado para que funcione con la exportación estática).
+1. ~~**Foto de perfil**~~ ✅ Ya está integrada (`public/profile.png`), con el fondo removido y recortada para encajar bien en el marco circular del hero.
 
 2. **CV / Currículum** — El botón "Descargar CV" del hero apunta a `public/cv.pdf`, que actualmente es un PDF de un solo párrafo a modo de placeholder. Reemplaza ese archivo por tu CV real (mismo nombre, `cv.pdf`, o actualiza la ruta en `components/sections/hero.tsx`).
 
@@ -89,4 +87,3 @@ Antes de publicar el sitio, hay algunos placeholders que dejé listos para que r
 - Todas las secciones comparten un **riel vertical tipo "circuito"** con un nodo brillante que recorre el lado izquierdo de la página, conectando visualmente cada sección (ver `components/section.tsx`).
 - Cada sección tiene un "eyebrow" estilo terminal (`$ whoami`, `$ cat about.md`, `$ ls skills/`, etc.) como guiño a tu perfil de ingeniero de sistemas.
 - Paleta: fondo casi negro (`#05070A`), acentos azules (`#3D63FF` / `#7FA8FF`), verde señal para elementos "vivos" (`#34D399`).
-# portfolio

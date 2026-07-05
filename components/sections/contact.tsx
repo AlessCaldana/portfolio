@@ -19,6 +19,7 @@ export function Contact() {
               <p className="max-w-sm text-base leading-relaxed text-muted">
                 {t.contact.description}
               </p>
+              <p className="mt-2 font-mono text-[11px] text-signal/80">{t.contact.availability}</p>
               <div className="mt-7">
                 <Button asChild>
                   <a href={`mailto:${contactInfo.email}`}>

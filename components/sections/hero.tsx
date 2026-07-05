@@ -16,7 +16,7 @@ const item = {
 };
 
 export function Hero() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
 
   const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
@@ -79,7 +79,7 @@ export function Hero() {
 
           <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-3">
             <Button asChild>
-              <a href="/cv.pdf" download>
+              <a href={`/cv-${locale}.pdf`} download={`Alessandro_Caldana_CV_${locale.toUpperCase()}`}>
                 <Download className="h-4 w-4" strokeWidth={1.75} />
                 {t.hero.ctaCV}
               </a>
