@@ -1,16 +1,27 @@
 # Alessandro Caldana — Portfolio
 
-Sitio portafolio personal, construido con **Next.js 15 + TypeScript + Tailwind CSS + Framer Motion + shadcn/ui + Lucide Icons**. Modo oscuro, glassmorphism, trilingüe (Español / English / Italiano) con selector de idioma persistente, animaciones al hacer scroll, contadores animados y un hilo conductor visual de "circuito" que recorre todas las secciones.
+Portafolio profesional personal construido con **Next.js 15 + TypeScript + Tailwind CSS + Framer Motion + shadcn/ui + Lucide Icons**. Diseño oscuro con glassmorphism, completamente trilingüe (Español · English · Italiano), selector de idioma con pantalla de bienvenida, animaciones al hacer scroll, casos de estudio técnicos y despliegue estático en Vercel.
+
+🌐 **En vivo:** [portfolio-self-seven-eb9ln0r1ff.vercel.app](https://portfolio-self-seven-eb9ln0r1ff.vercel.app)
+
+---
 
 ## Stack técnico
 
-- **Next.js 15** (App Router, exportación estática vía `output: "export"`)
-- **TypeScript**
-- **Tailwind CSS** (tokens de color y tipografía personalizados)
-- **Framer Motion** (animaciones de scroll, stagger, contador animado)
-- **shadcn/ui** (Button, Card, Badge, Progress — construidos a mano sobre Radix)
-- **Lucide Icons**
-- Fuentes autoalojadas vía `@fontsource` (Space Grotesk, Inter, JetBrains Mono) — no dependen de una conexión a Google Fonts en el momento del build, lo que hace el proyecto más portable (CI, entornos sin acceso a internet, etc.)
+| Capa | Tecnología |
+|---|---|
+| Framework | Next.js 15 (App Router, `output: "export"`) |
+| Lenguaje | TypeScript |
+| Estilos | Tailwind CSS con tokens personalizados |
+| Animaciones | Framer Motion (scroll, stagger, contadores) |
+| Componentes | shadcn/ui construido sobre Radix UI |
+| Iconos | Lucide Icons |
+| Fuentes | `@fontsource` autoalojadas — Space Grotesk, Inter, JetBrains Mono |
+| Despliegue | Vercel (exportación estática) |
+
+Las fuentes se sirven localmente vía `@fontsource`, sin depender de Google Fonts en el build — ideal para CI y entornos con red restringida.
+
+---
 
 ## Cómo correrlo localmente
 
@@ -21,69 +32,122 @@ npm run dev
 
 Abre [http://localhost:3000](http://localhost:3000).
 
-## Cómo generar el build de producción
+## Build de producción
 
 ```bash
 npm run build
 ```
 
-Esto genera un sitio **100% estático** en la carpeta `/out` (gracias a `output: "export"` en `next.config.mjs`), que puedes subir a cualquier hosting estático: Vercel, Netlify, GitHub Pages, Cloudflare Pages, un bucket S3, etc.
+Genera un sitio **100% estático** en `/out`. Puedes subirlo a Vercel, Netlify, GitHub Pages, Cloudflare Pages o cualquier hosting estático.
 
 ### Despliegue recomendado: Vercel
 
-1. Sube este proyecto a un repositorio de GitHub.
-2. Importa el repo en [vercel.com](https://vercel.com).
-3. Vercel detecta Next.js automáticamente — no necesitas configurar nada más.
+1. Sube el proyecto a GitHub.
+2. Importa el repo en [vercel.com](https://vercel.com) → detecta Next.js automáticamente.
+3. Cada `git push` a `main` dispara un nuevo deploy.
 
-Si prefieres otro hosting estático, simplemente sube el contenido de la carpeta `/out` generada por `npm run build`.
+---
 
 ## Estructura del proyecto
 
 ```
 app/
-  layout.tsx          # Layout raíz: fuentes, metadata, I18nProvider
-  page.tsx             # Ensambla todas las secciones en orden
-  globals.css          # Tokens base, utilidades (.glass, .bg-noise, etc.)
+  layout.tsx           # Fuentes (@fontsource), metadata SEO, I18nProvider
+  page.tsx             # Orden de secciones: Hero → About → Skills → Experience
+                       #   → Case Studies → Projects → Education → Certs →
+                       #   → Languages → Stats → Contact → Footer
+  globals.css          # Tokens base, .glass, .glass-strong, .bg-noise, transiciones
+
 components/
-  navbar.tsx            # Navbar fija + menú móvil + selector de idioma
+  locale-gate.tsx       # Pantalla de bienvenida con selector de idioma (primera visita)
+  navbar.tsx            # Navbar fija, menú móvil, LanguageSwitcher
   footer.tsx
-  section.tsx           # Wrapper compartido: eyebrow tipo terminal + riel de circuito
-  timeline.tsx           # Timeline reutilizable (Experiencia, Educación)
-  hero-illustration.tsx  # Ilustración animada del hero (avatar, chips flotantes)
-  animated-counter.tsx   # Contador animado para Estadísticas
-  language-switcher.tsx
-  ui/                    # Button, Card, Badge, Progress (estilo shadcn)
-  sections/               # Una sección por archivo: hero, about, skills,
-                           # projects, experience, education, languages,
-                           # certifications, stats, contact
+  section.tsx           # Wrapper compartido: eyebrow terminal + riel de circuito SVG
+  timeline.tsx          # Timeline reutilizable (Experiencia, Educación)
+  hero-illustration.tsx # Avatar circular con foto, circuito SVG, chips flotantes
+  animated-counter.tsx  # Contador animado con easing para Estadísticas
+  language-switcher.tsx # Dropdown con banderas SVG (ES · EN · IT)
+  flag-icon.tsx         # Banderas circulares en SVG puro (sin emoji, compatible Windows)
+  reveal.tsx            # Wrapper genérico scroll-reveal (Framer Motion whileInView)
+  ui/                   # Button, Card, Badge, Progress (estilo shadcn/Radix)
+  sections/
+    hero.tsx            # Hero con foto, nombre, rol, descripción, CTAs
+    about.tsx           # Sobre mí: 3 párrafos + badges
+    skills.tsx          # Tecnologías: 3 tiers (producción, workflow, explorando)
+    experience.tsx      # Experiencia: múltiples entradas con sub-items por cliente
+    case-studies.tsx    # Casos de estudio: problema / decisión / arquitectura / métricas
+    projects.tsx        # Grid de 6 proyectos con decisiones técnicas
+    education.tsx       # Timeline de educación
+    certifications.tsx  # Estado vacío listo para expandir
+    languages.tsx       # 3 idiomas con banderas SVG y nota de ciudadanía
+    stats.tsx           # 4 contadores animados con métricas reales
+    contact.tsx         # Email, GitHub, LinkedIn, disponibilidad Italia
+
 lib/
-  translations.ts        # Todo el contenido y las 3 traducciones (es/en/it)
-  i18n-context.tsx        # Contexto de idioma + persistencia en localStorage
-  utils.ts
+  translations.ts      # TODO el contenido en ES · EN · IT (único archivo a editar)
+  i18n-context.tsx     # Contexto de idioma, localStorage, setLocale()
+  utils.ts             # cn() helper (clsx + tailwind-merge)
+
 public/
-  cv.pdf                  # ⚠️ Placeholder — reemplázalo (ver checklist abajo)
+  profile.png          # ✅ Foto real con fondo removido (800×800px)
+  cv.pdf               # ✅ CV real (Alessandro Caldana)
+  cv-es.pdf            # CV en español (descarga cuando idioma = ES)
+  cv-en.pdf            # CV en inglés (descarga cuando idioma = EN) — reemplazar
+  cv-it.pdf            # CV en italiano (descarga cuando idioma = IT) — reemplazar
 ```
 
-## Idiomas
+---
 
-El selector de idioma (🇪🇸 / 🇺🇸 / 🇮🇹) vive en la navbar y en el menú móvil. La preferencia se guarda en `localStorage` bajo la clave `ac-portfolio-locale`, así que la elección del visitante persiste entre visitas. Todo el copy del sitio vive centralizado en `lib/translations.ts` — si quieres editar cualquier texto (en cualquiera de los 3 idiomas), ese es el único archivo que necesitas tocar.
+## Sistema de idiomas
 
-## ✅ Checklist pendiente para ti
+### Pantalla de bienvenida (LocaleGate)
 
-Antes de publicar el sitio, hay algunos placeholders que dejé listos para que reemplaces:
+En la **primera visita** aparece una pantalla de bienvenida completa antes de mostrar el portafolio. El usuario elige entre tres tarjetas de idioma (IT · EN · ES). La elección se guarda en `localStorage` bajo la clave `ac-portfolio-locale` y no vuelve a aparecer en visitas posteriores.
 
-1. ~~**Foto de perfil**~~ ✅ Ya está integrada (`public/profile.png`), con el fondo removido y recortada para encajar bien en el marco circular del hero.
+El idioma se puede cambiar en cualquier momento desde el selector en la navbar — sin regresar a la pantalla inicial.
 
-2. **CV / Currículum** — El botón "Descargar CV" del hero apunta a `public/cv.pdf`, que actualmente es un PDF de un solo párrafo a modo de placeholder. Reemplaza ese archivo por tu CV real (mismo nombre, `cv.pdf`, o actualiza la ruta en `components/sections/hero.tsx`).
+### Editar contenido
 
-3. **Fechas de experiencia** — En `lib/translations.ts`, la sección `experience` usa el período "En curso" / "Ongoing" / "In corso" porque no me diste fechas exactas. Si quieres mostrar un rango de fechas específico, edítalo ahí (en las 3 traducciones).
+Todo el texto del sitio vive en **`lib/translations.ts`** — un único archivo con los tres idiomas. Para cambiar cualquier texto basta editar ese archivo.
 
-4. **Certificaciones** — La sección está construida como un estado vacío ("Próximamente...") listo para que agregues certificados reales más adelante. Cuando tengas cursos/certificados para mostrar, puedo ayudarte a convertir `components/sections/certifications.tsx` en una grilla de tarjetas (como la de Proyectos) usando el mismo patrón.
+### CVs por idioma
 
-5. **Dominio / metadata** — El `<title>` y la descripción SEO en `app/layout.tsx` están listos, pero si tienes un dominio propio quizás quieras agregar Open Graph tags o un favicon personalizado en `app/` (actualmente usa el favicon por defecto de Next.js).
+El botón "Descargar CV" descarga el archivo correspondiente al idioma activo:
+- Español → `public/cv-es.pdf`
+- English → `public/cv-en.pdf` *(reemplazar con versión en inglés)*
+- Italiano → `public/cv-it.pdf` *(reemplazar con versión en italiano)*
+
+---
+
+## ✅ Checklist de estado actual
+
+| Item | Estado |
+|---|---|
+| Foto de perfil | ✅ Integrada (`public/profile.png`, fondo removido, recortada) |
+| CV real | ✅ Subido (`public/cv.pdf` y variantes por idioma) |
+| LinkedIn | ✅ Configurado en `lib/translations.ts` → `contactInfo` |
+| Pantalla de bienvenida | ✅ `LocaleGate` con diseño premium |
+| Banderas SVG | ✅ Sin emoji (compatible Windows/Linux) |
+| Experiencia laboral | ✅ EMDUPAR S.A. E.S.P. + MI DIARIO + Freelance con clientes reales |
+| Casos de estudio | ✅ EMDUPAR (PHP 5.3 + MySQL, 12 módulos) + Uziel Querit (multitenant) |
+
+### Pendiente
+
+1. **CV en inglés e italiano** — `public/cv-en.pdf` y `public/cv-it.pdf` actualmente son copias del CV en español. Cuando tengas las versiones traducidas, reemplaza los archivos manteniendo el mismo nombre.
+
+2. **Certificaciones** — La sección está construida como estado vacío con el texto de los cursos planeados (AWS Cloud Practitioner, Meta Front-End, CS50x). Cuando los obtengas, convierte `components/sections/certifications.tsx` en una grilla de tarjetas usando el mismo patrón de `projects.tsx`.
+
+3. **Dominio personalizado** — El sitio corre en `*.vercel.app`. Si adquieres un dominio propio (ej. `alessandrocaldana.dev`), agrégalo en Vercel → Settings → Domains. También considera añadir Open Graph tags en `app/layout.tsx` para mejor preview en LinkedIn y WhatsApp.
+
+4. **Favicon** — Actualmente usa el favicon por defecto de Next.js. Para uno personalizado, agrega `app/favicon.ico` o `app/icon.png`.
+
+---
 
 ## Notas de diseño
 
-- Todas las secciones comparten un **riel vertical tipo "circuito"** con un nodo brillante que recorre el lado izquierdo de la página, conectando visualmente cada sección (ver `components/section.tsx`).
-- Cada sección tiene un "eyebrow" estilo terminal (`$ whoami`, `$ cat about.md`, `$ ls skills/`, etc.) como guiño a tu perfil de ingeniero de sistemas.
-- Paleta: fondo casi negro (`#05070A`), acentos azules (`#3D63FF` / `#7FA8FF`), verde señal para elementos "vivos" (`#34D399`).
+- **Riel de circuito:** todas las secciones comparten un riel vertical SVG con un nodo brillante en el lado izquierdo que las conecta visualmente (ver `components/section.tsx`).
+- **Eyebrows terminales:** cada sección abre con un prompt de terminal (`$ whoami`, `$ cat about.md`, `$ ls skills/`, etc.) como guiño al perfil de Ingeniería de Sistemas.
+- **Tiers de habilidades:** en lugar de barras de porcentaje, las tecnologías se agrupan en tres niveles: *Stack principal* (producción real), *Herramientas de trabajo* y *Explorando actualmente*.
+- **Experiencia con clientes reales:** la sección de experiencia muestra cada empleador/cliente como sub-item con sector y descripción de impacto.
+- **Casos de estudio:** dos proyectos (EMDUPAR y Uziel Querit) tienen su propio caso de estudio con columnas problema / solución / decisión técnica + diagrama de arquitectura en ASCII + métricas reales.
+- **Paleta:** `#05070A` (fondo void), `#3D63FF / #7FA8FF` (acentos azules), `#34D399` (verde señal para estados "vivos").
