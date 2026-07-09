@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, ReactNode } from "react";
 import { Locale, Dictionary, dictionaries, locales } from "./translations";
 
-export const STORAGE_KEY = "ac-portfolio-locale";
+const STORAGE_KEY = "ac-portfolio-locale";
 
 interface I18nContextValue {
   locale: Locale;

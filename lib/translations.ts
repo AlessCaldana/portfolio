@@ -51,6 +51,23 @@ export interface Dictionary {
     emailLabel: string; githubLabel: string; linkedinLabel: string; countriesLabel: string; cta: string;
   };
   footer: { tagline: string; rights: string; builtWith: string; };
+  projectModal: {
+    viewCase: string;
+    tab_info: string;
+    tab_gallery: string;
+    tab_tech: string;
+    role: string;
+    client: string;
+    year: string;
+    status: string;
+    whatIBuilt: string;
+    features: string;
+    statsLabel: string;
+    devProcess: string;
+    counter: string;
+    pressEsc: string;
+    zoom: string;
+  };
 }
 
 export const dictionaries: Record<Locale, Dictionary> = {
@@ -307,6 +324,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
       rights: "Todos los derechos reservados.",
       builtWith: "Construido con Next.js, TypeScript & Tailwind CSS.",
     },
+    projectModal: {
+      viewCase: "Ver Case Study",
+      tab_info: "Información",
+      tab_gallery: "Galería",
+      tab_tech: "Tecnologías",
+      role: "Rol",
+      client: "Cliente",
+      year: "Año",
+      status: "Estado",
+      whatIBuilt: "¿Qué desarrollé?",
+      features: "Características",
+      statsLabel: "Estadísticas",
+      devProcess: "Proceso de desarrollo",
+      counter: "de",
+      pressEsc: "ESC para cerrar",
+      zoom: "Clic para ampliar",
+    },
   },
 
   /* ─── ENGLISH ─────────────────────────────────────────────────── */
@@ -562,6 +596,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
       rights: "All rights reserved.",
       builtWith: "Built with Next.js, TypeScript & Tailwind CSS.",
     },
+    projectModal: {
+      viewCase: "View Case Study",
+      tab_info: "Information",
+      tab_gallery: "Gallery",
+      tab_tech: "Technologies",
+      role: "Role",
+      client: "Client",
+      year: "Year",
+      status: "Status",
+      whatIBuilt: "What I built",
+      features: "Features",
+      statsLabel: "Statistics",
+      devProcess: "Development process",
+      counter: "of",
+      pressEsc: "ESC to close",
+      zoom: "Click to zoom",
+    },
   },
 
   /* ─── ITALIANO ─────────────────────────────────────────────────── */
@@ -816,6 +867,23 @@ export const dictionaries: Record<Locale, Dictionary> = {
       tagline: "Ingegneria con criterio. Codice con scopo.",
       rights: "Tutti i diritti riservati.",
       builtWith: "Costruito con Next.js, TypeScript & Tailwind CSS.",
+    },
+    projectModal: {
+      viewCase: "Vedi Case Study",
+      tab_info: "Informazioni",
+      tab_gallery: "Galleria",
+      tab_tech: "Tecnologie",
+      role: "Ruolo",
+      client: "Cliente",
+      year: "Anno",
+      status: "Stato",
+      whatIBuilt: "Cosa ho sviluppato",
+      features: "Caratteristiche",
+      statsLabel: "Statistiche",
+      devProcess: "Processo di sviluppo",
+      counter: "di",
+      pressEsc: "ESC per chiudere",
+      zoom: "Clic per ingrandire",
     },
   },
 };

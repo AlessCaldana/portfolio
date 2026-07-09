@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useI18n, STORAGE_KEY } from "@/lib/i18n-context";
+import { useI18n } from "@/lib/i18n-context";
 import { locales, Locale } from "@/lib/translations";
 import { FlagIcon } from "@/components/flag-icon";
+
+const STORAGE_KEY = "ac-portfolio-locale";
 
 const CARDS: { locale: Locale; label: string; subtitle: string }[] = [
   { locale: "it", label: "Italiano",  subtitle: "Madrelingua" },
@@ -21,39 +23,27 @@ const WELCOME = [
 export function LocaleGate({ children }: { children: React.ReactNode }) {
   const { setLocale } = useI18n();
   const [showGate, setShowGate] = useState(false);
-  const [ready, setReady] = useState(false);
+  const [mounted,  setMounted]  = useState(false);
   const [selected, setSelected] = useState<Locale | null>(null);
 
   useEffect(() => {
+    setMounted(true);
     try {
-      const storedLocale = window.localStorage.getItem(STORAGE_KEY);
-      if (!storedLocale) {
-        setShowGate(true);
-      }
-    } catch {
-      setShowGate(true);
-    } finally {
-      setReady(true);
-    }
+      if (!window.localStorage.getItem(STORAGE_KEY)) setShowGate(true);
+    } catch { /* storage blocked */ }
   }, []);
 
   const pick = (l: Locale) => {
     if (selected) return;
     setSelected(l);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, l);
-    } catch {
-      // Ignore write errors.
-    }
-    setLocale(l);
-    setTimeout(() => setShowGate(false), 520);
+    setTimeout(() => { setLocale(l); setShowGate(false); }, 520);
   };
 
-  if (!ready) return null;
+  if (!mounted) return <>{children}</>;
 
   return (
     <>
-      {!showGate && children}
+      {children}
 
       <AnimatePresence>
         {showGate && (
